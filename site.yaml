@@ -1,0 +1,6 @@
+---
+
+ - hosts: ops1
+   roles:
+    - grp1
+

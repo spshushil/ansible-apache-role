@@ -1,0 +1,8 @@
+---
+- name: Java installation
+  become: true
+  apt:
+    name: openjdk-11-jdk
+    state: latest
+    update_cache: yes
+

@@ -1,0 +1,8 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for grp1
+- import_tasks: install.yml
+- import_tasks: config.yml
+- import_tasks: service.yml
+- import_tasks: java.yml
+
