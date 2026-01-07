@@ -1,0 +1,87 @@
+ANSIBLE INSTALLATION
+
+Master 
+
+sudo apt update
+sudo apt install software-properties-common -y
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible -y
+
+ping issue
+
+sudo nano /etc/ansible/ansible.cfg
+
+[defaults]
+host_key_checking = False
+
+roles
+
+cd /etc/ansible/roles
+sudo apt install tree
+sudo ansible-galaxy init grp1 --offline
+
+
+scritp for task
+ 
+- import_tasks: install.yml
+- import_tasks: config.yml
+- import_tasks: service.yml
+- import_tasks: java.yml
+
+sudo nano install.yml
+
+---
+
+ - name: install apache2
+   apt: name=apache2 state=latest
+   become: true
+
+sudo nano config.yml
+
+---
+- name: post installation
+  become: true
+  copy:
+    src: index.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
+
+
+
+sudo nano service.yml
+
+---
+- name: service
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+
+
+sudo nano java.yml
+
+---
+
+ -name: java installation
+  apt: name=Openjdk-11-jdk state=latest
+  become: true
+
+cd ..
+
+cd file/
+sudo nano index.html
+
+cd..                   #(until reach to ansible)
+
+sudo nano site.yaml
+
+---
+
+ - hosts: ops1 
+   roles:
+    - grp1
+
+
+
